@@ -34,11 +34,6 @@ const devConf = merge(baseConf, {
     port: 8008,
     hot: true,
     inline: true,
-    // stats: {
-    //   colors: true,
-    //   modules: false,
-    //   children: false,
-    // }
     stats: 'none'
   },
   plugins: [

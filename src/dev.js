@@ -10,5 +10,5 @@ const compiler = new Compiler({ config: webpackConfig })
 const devServer = new WebpackDevServer(compiler, webpackConfig.devServer)
 const tip = `Starting server on http://${ip.address()}:${webpackConfig.devServer.port}`
 devServer.listen(webpackConfig.devServer.port, webpackConfig.devServer.host, () => {
-  console.log(chalk.hex('#00f581')(tip))
+  console.log(chalk.green.bold(tip))
 })

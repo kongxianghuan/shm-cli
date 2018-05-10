@@ -2,7 +2,7 @@ const path = require('path')
 const babelConf = require('../config/babel.config')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const shmNodeModulesPath = path.resolve(__dirname, '../node_modules')
-const appNodeModulesPath = path.resolve(process.cwd(), 'src/node_modules')
+const appNodeModulesPath = path.resolve(process.cwd(), 'node_modules')
 const resolveModules = [ shmNodeModulesPath, appNodeModulesPath ]
 
 const baseConf = {
@@ -36,7 +36,7 @@ const baseConf = {
         loader: 'url-loader',
         options: {
           limit: 1000,
-          name: 'assets/[name].[hash:8].[ext]'
+          name: 'assets/[name].[chunkhash:8].[ext]'
         }
       },
     }, {
@@ -45,7 +45,7 @@ const baseConf = {
         loader: 'url-loader',
         options: {
           limit: 1000,
-          name: 'assets/[name].[hash:8].[ext]'
+          name: 'assets/[name].[chunkhash:8].[ext]'
         }
       }
     }, {

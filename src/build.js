@@ -6,6 +6,6 @@ const chalk = require('chalk')
 const compiler = new Compiler({
   config: webpackConfig,
   done: () => {
-    console.log(chalk.green('Build finished'))
+    console.log(chalk.green.bold('Build finished!'))
   }
 })

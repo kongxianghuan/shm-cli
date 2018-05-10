@@ -46,15 +46,8 @@ const buildConf = merge(baseConf, {
       root: path.resolve(process.cwd())
     }),
     new ExtractTextPlugin({
-      filename: 'assets/index.[hash:8].css'
+      filename: 'assets/index.[chunkHash:8].css'
     }),
-    // new UglifyJsPlugin({
-    //   uglifyOptions: {
-    //     compress: { warnings: false },
-    //     mangle: { safari10: true }
-    //   },
-    //   parallel: true
-    // })
   ]
 })
 
