@@ -1,13 +1,18 @@
 process.env.NODE_ENV = 'production'
 
 const webpack = require('webpack')
-const webpackConfig = require('../webpack/webpack.build')
-const Compiler = require('./compiler')
 const chalk = require('chalk')
+const path = require('path')
+const Compiler = require('./compiler')
+const webpackConfig = require('../webpack/webpack.build')
+const mergeCustomConfig = require('./mergeCustomConfig')
 
-const compiler = new Compiler({
-  config: webpackConfig,
-  done: () => {
-    console.log(chalk.green.bold('\n[Build finished!]'))
-  }
+const customDevConfigPath = path.resolve(process.cwd(), 'shm_config/prodConfig.js')
+mergeCustomConfig(customDevConfigPath, webpackConfig).then(config => {
+  const compiler = new Compiler({
+    config: config,
+    done: () => {
+      console.log(chalk.green.bold('\n[Build finished!]'))
+    }
+  })
 })
