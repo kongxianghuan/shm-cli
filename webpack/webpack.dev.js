@@ -22,6 +22,14 @@ const devConf = merge(baseConf, {
   devtool: '#cheap-module-source-map',
   module: {
     rules: [{
+      test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+      use: {
+        loader: 'file-loader',
+        options: {
+          name: 'assets/[name].[hash:8].[ext]'
+        }
+      },
+    }, {
       test: /\.css$/,
       use: cssLoader
     }, {
@@ -34,7 +42,9 @@ const devConf = merge(baseConf, {
     port: 8008,
     hot: true,
     inline: true,
-    stats: 'none'
+    stats: 'none',
+    contentBase: [ path.resolve(process.cwd(), 'src') ],
+    watchContentBase: true
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin()

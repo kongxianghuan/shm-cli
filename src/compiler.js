@@ -1,12 +1,13 @@
 const webpack = require('webpack')
 
-function Compiler(opts) {
-  let compiler = webpack(opts.config, opts.done)
+function Compiler({ config, done = null }) {
+  let compiler = webpack(config, done)
   compiler.hooks.done.tap('done', stats => {
     process.stdout.write(stats.toString({
       colors: true,
       modules: false,
       children: false,
+      entrypoints: false,
     }) + '\n')
   })
 

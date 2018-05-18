@@ -31,21 +31,12 @@ const baseConf = {
         options: babelConf
       }
     }, {
-      test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-      use: {
-        loader: 'url-loader',
-        options: {
-          limit: 1000,
-          name: 'assets/[name].[chunkhash:8].[ext]'
-        }
-      },
-    }, {
       test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
       use: {
         loader: 'url-loader',
         options: {
           limit: 1000,
-          name: 'assets/[name].[chunkhash:8].[ext]'
+          name: 'assets/[name].[hash:8].[ext]'
         }
       }
     }, {
