@@ -27,12 +27,9 @@ exports.getPort = opts => {
         opts.port++
         checkPort(opts)
       })
-      server.listen(opts.port, opts.ip, () => {
+      server.listen(opts.port, opts.host, () => {
         let validPort = server.address().port
-        server.close(() => {
-          server = null
-          resolve(validPort)
-        })
+        server.close(() => resolve(validPort))
       })
     } 
     checkPort(opts)
