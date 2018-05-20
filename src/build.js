@@ -5,7 +5,7 @@ const chalk = require('chalk')
 const path = require('path')
 const Compiler = require('./compiler')
 const webpackConfig = require('../webpack/webpack.build')
-const mergeCustomConfig = require('./mergeCustomConfig')
+const mergeCustomConfig = require('./utils').mergeCustomConfig
 
 const customDevConfigPath = path.resolve(process.cwd(), 'shm_config/prodConfig.js')
 mergeCustomConfig(customDevConfigPath, webpackConfig).then(config => {

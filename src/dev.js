@@ -1,6 +1,6 @@
 process.env.NODE_ENV = 'development'
 
-const mergeCustomConfig = require('./mergeCustomConfig')
+const mergeCustomConfig = require('./utils').mergeCustomConfig
 const WebpackDevServer = require('webpack-dev-server')
 const webpackConfig = require('../webpack/webpack.dev')
 const Compiler = require('./compiler')
@@ -8,6 +8,7 @@ const chalk = require('chalk')
 const opn = require('opn')
 const ip = require('ip')
 const path = require('path')
+const getPort = require('./utils').getPort
 
 function initDevServer(config) {
   let address = `http://${ip.address()}:${config.devServer.port}`
@@ -25,5 +26,9 @@ function initDevServer(config) {
 
 const customDevConfigPath = path.resolve(process.cwd(), 'shm_config/devConfig.js')
 mergeCustomConfig(customDevConfigPath, webpackConfig).then(config => {
-  initDevServer(config)
+  let { port, host } = config.devServer
+  getPort({ port: port, ip: host }).then(port => {
+    config.devServer.port = port
+    initDevServer(config)
+  })
 })
