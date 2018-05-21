@@ -20,23 +20,6 @@ const sassLoader = cssLoader.concat('sass-loader')
 const devConf = merge(baseConf, {
   mode: 'development',
   devtool: '#cheap-module-source-map',
-  module: {
-    rules: [{
-      test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-      use: {
-        loader: 'file-loader',
-        options: {
-          name: 'assets/[name].[hash:8].[ext]'
-        }
-      },
-    }, {
-      test: /\.css$/,
-      use: cssLoader
-    }, {
-      test: /\.scss$/,
-      use: sassLoader
-    }]
-  },
   devServer: {
     host: '0.0.0.0',
     port: 8000,
