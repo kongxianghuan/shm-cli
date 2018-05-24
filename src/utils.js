@@ -4,17 +4,30 @@ const merge = require('webpack-merge')
 const net = require('net')
 
 // 合并自定义webpack配置
-exports.mergeCustomConfig = (customPath, config) => {
-  return new Promise((resolve, reject) => {
-    fs.access(customPath, err => {
-      if (!err) {
-        const customConfig = require(customPath)
-        resolve(merge(config, customConfig))
-      } else {
+const getCustomConfig = customPath => {
+  let getConfig = path => {
+    return new Promise((resolve, reject) => {
+      fs.access(path, err => {
+        let config = !err ? require(path) : {}
         resolve(config)
-      }
+      })
     })
-  })
+  }
+
+  if (typeof customPath === 'string') {
+    return getConfig(customPath)
+  }
+
+  if (Array.isArray(customPath)) {
+    let taskList = customPath.map(path => getConfig(path))
+    return Promise.all(taskList).then(configList => {
+      let config = configList.reduce((cur, prev) => merge(prev, cur), {})
+      return config
+    })
+  }
+}
+exports.mergeCustomConfig = (customPath, config) => {
+  return getCustomConfig(customPath).then(customConfig => merge(config, customConfig))
 }
 
 // 检查端口占用

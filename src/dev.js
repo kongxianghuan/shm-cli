@@ -24,8 +24,9 @@ function initDevServer(config) {
   })
 }
 
+const customCommonConfigPath = path.resolve(process.cwd(), 'shm_config/commonConfig.js')
 const customDevConfigPath = path.resolve(process.cwd(), 'shm_config/devConfig.js')
-mergeCustomConfig(customDevConfigPath, webpackConfig).then(config => {
+mergeCustomConfig([customCommonConfigPath, customDevConfigPath], webpackConfig).then(config => {
   let { port, host } = config.devServer
   getPort({ port, host }).then(validPort => {
     config.devServer.port = validPort

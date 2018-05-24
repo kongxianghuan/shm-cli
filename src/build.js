@@ -7,8 +7,9 @@ const Compiler = require('./compiler')
 const webpackConfig = require('../webpack/webpack.build')
 const mergeCustomConfig = require('./utils').mergeCustomConfig
 
-const customDevConfigPath = path.resolve(process.cwd(), 'shm_config/prodConfig.js')
-mergeCustomConfig(customDevConfigPath, webpackConfig).then(config => {
+const customCommonConfigPath = path.resolve(process.cwd(), 'shm_config/commonConfig.js')
+const customProdConfigPath = path.resolve(process.cwd(), 'shm_config/prodConfig.js')
+mergeCustomConfig([customCommonConfigPath, customProdConfigPath], webpackConfig).then(config => {
   const compiler = new Compiler({
     config: config,
     done: () => {
