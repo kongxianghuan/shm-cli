@@ -22,7 +22,8 @@ const mediaRule = {
   use: {
     loader: 'url-loader',
     options: {
-      name: 'assets/[name].[hash:8].[ext]'
+      name: 'assets/[name].[hash:8].[ext]',
+      limit: 1000
     }
   }
 }
