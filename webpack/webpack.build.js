@@ -6,6 +6,9 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const path = require('path')
 
 const buildConf = merge(baseConf, {
+  output: {
+    chunkFilename: 'assets/[name].[chunkhash:8].chunk.js'
+  },
   mode: 'production',
   plugins: [
     new CleanWebpackPlugin([path.resolve(process.cwd(), 'dist')], {
@@ -13,6 +16,10 @@ const buildConf = merge(baseConf, {
     })
   ],
   optimization: {
+    splitChunks: {
+      chunks: 'all'
+    },
+    // runtimeChunk: true,
     minimizer: [
       new UglifyJsPlugin({
         uglifyOptions: {
