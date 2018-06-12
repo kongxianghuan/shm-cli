@@ -20,7 +20,7 @@ function initDevServer(config) {
   devServer.listen(config.devServer.port, config.devServer.host, () => {
     console.log(chalk.green.bold(tip))
     // TODO: 复用已打开的标签
-    opn(address, { app: 'google chrome' })
+    opn(address)
   })
 }
 
