@@ -86,7 +86,7 @@ const styleRule = {
 
 const baseConf = {
   entry: {
-    index: [path.resolve(process.cwd(), 'src/js/index.js')]
+    index: ['babel-polyfill', path.resolve(process.cwd(), 'src/js/index.js')]
   },
   output: {
     path: path.resolve(process.cwd(), 'dist'),
